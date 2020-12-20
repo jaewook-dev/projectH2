@@ -36,6 +36,6 @@ var dbConnection = {
     }
 };
 
-//module.exports = dbConnection;
+//module.exports = dbConnection; // 이거 왜 안됨?
 export default dbConnection
 
