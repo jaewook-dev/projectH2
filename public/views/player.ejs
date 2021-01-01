@@ -31,6 +31,13 @@
       border-radius: 0.25rem;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+    input:focus {
+      color: #495057;
+      background-color: #fff;
+      border-color: #80bdff;
+      outline: 0;
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
   </style>
   <!-- Custom styles for this template -->
   <link href="/css/player.css" rel="stylesheet">
@@ -58,11 +65,44 @@
         <tr>
           <td>포수</td>
           <td><input type="text"></td>
-          <td><input type="text"></td>
-          <td>타입</td>
-          <td>타순</td>
-          <td>레벨</td>
-          <td>나이</td>
+          <td>
+            <select class="custom-select" id="playerGrade" required>
+              <option value="">클래식</option>
+              <option value="">프랜차이즈</option>
+              <option value="">익스</option>
+              <option value="">시그니처</option>
+              <option value="">마스터</option>
+            </select>
+          </td>
+          <td>
+            <select class="custom-select" id="playerType" required>
+              <option value="">작전수행</option>
+              <option value="">호타준족</option>
+              <option value="">슬러거</option>
+              <option value="">밸런스</option>
+            </select>
+          </td>
+          <td>
+            <select class="custom-select" id="playerOrder" required>
+              <option value="">상위</option>
+              <option value="">클린업</option>
+              <option value="">하위</option>
+            </select>
+          </td>
+          <td>
+            <select class="custom-select" id="playerLevel" required>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+            </select>
+          </td>
+          <td>
+            <select class="custom-select" id="playerAge" required>
+              <option value="">1</option>
+              <option value="">2</option>
+              <option value="">3</option>
+            </select>
+          </td>
           <td>부포지션</td>
         </tr>
       </table>
