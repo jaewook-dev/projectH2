@@ -53,13 +53,14 @@
     <div class="row">
       <table class="table table-striped">
         <tr>
-          <td>포지션</td>
-          <td>이름</td>
-          <td>등급</td>
-          <td>타입</td>
-          <td>타순</td>
-          <td>레벨</td>
-          <td>나이</td>
+          <td style="width: 7%;">포지션</td>
+          <td style="width: 10%;">이름</td>
+          <td style="width: 15%;">등급</td>
+          <td style="width: 15%;">타입</td>
+          <td style="width: 10%;">타순</td>
+          <td style="width: 8%;">레벨</td>
+          <td style="width: 8%;">연도</td>
+          <td style="width: 8%;">나이</td>
           <td>부포지션</td>
         </tr>
         <tr>
@@ -97,13 +98,20 @@
             </select>
           </td>
           <td>
-            <select class="custom-select" id="playerAge" required>
+            <select class="custom-select" id="playerYear"" required>
               <option value="">1</option>
               <option value="">2</option>
-              <option value="">3</option>
+              <option value="">30</option>
             </select>
           </td>
-          <td>부포지션</td>
+          <td><input type="text"></td>
+          <td>
+            <select class="custom-select" id="playerSubPosition" required>
+              <option value="">NONE</option>
+              <option value="">포수</option>
+              <option value="">1루수</option>
+            </select>
+          </td>
         </tr>
       </table>
       <!-- <div>
