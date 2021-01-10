@@ -6,9 +6,12 @@ import ejs from 'ejs';
 import database from './config/database.js';
 import bodyParser from 'body-parser'; // POST로 요청된 body를 쉽게 추출할 수 있는 모듈.
 import bcrypt from 'bcrypt';
+import mysql from 'mysql';
+import consoleStamp from 'console-stamp'; // console.log 시간 정보 추가
 
 const __dirname = path.resolve();
 const app = express();
+consoleStamp(console, ['yyyy/mm/dd HH:MM:ss.l']); // console-stamp pattern 설정
 
 // body-parser 사용
 app.use(bodyParser.urlencoded({
@@ -19,7 +22,7 @@ app.use(bodyParser.urlencoded({
 var dbConn = database.init();
 
 // DB 연결 확인
-var dbConn = database.dbConnCheck(dbConn);
+database.dbConnCheck(dbConn);
 
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'ejs');
@@ -38,6 +41,27 @@ app.post('/login', function(req, res) {
     var inputPW = req.body.inputPW;
 
     console.log(`ID : ${inputID}, PW : ${inputPW}`);
+
+    var idCheckSql = "SELECT MEMBER_ID, MEMBER_NAME FROM MEMBER_INF WHERE MEMBER_ID = ?";
+
+    dbConn.query(idCheckSql, [inputID], function(err, results){
+        
+        if(err) {
+            console.log(err);
+        } 
+
+        var memberID = results[0];
+
+        if(memberID == null) {
+            console.log("login fail");
+            res.send("login fail!!");
+        } else {
+
+        }
+
+        console.log(results[0]);
+    });
+    
 });
 
 // 회원 가입
