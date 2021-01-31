@@ -15,15 +15,18 @@
   <link href="/assets/dist/css/bootstrap.css" rel="stylesheet">
 
   <style>
-    td{text-align:center}
-    input{
+    td {
+      text-align: center
+    }
+
+    input {
       display: block;
       width: 100%;
       height: calc(1.5em + 0.75rem + 2px);
       padding: 0.375rem 0.75rem;
       font-size: 1rem;
       font-weight: 400;
-      line-height: 1.5; 
+      line-height: 1.5;
       color: #495057;
       background-color: #fff;
       background-clip: padding-box;
@@ -31,6 +34,7 @@
       border-radius: 0.25rem;
       transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     }
+
     input:focus {
       color: #495057;
       background-color: #fff;
@@ -42,6 +46,7 @@
   <!-- Custom styles for this template -->
   <link href="/css/player.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
   <div class="container">
     <div class="py-5 text-center">
@@ -51,69 +56,107 @@
     </div>
 
     <div class="row">
-      <table class="table table-striped">
-        <tr>
-          <td style="width: 7%;">포지션</td>
-          <td style="width: 10%;">이름</td>
-          <td style="width: 15%;">등급</td>
-          <td style="width: 15%;">타입</td>
-          <td style="width: 10%;">타순</td>
-          <td style="width: 8%;">레벨</td>
-          <td style="width: 8%;">연도</td>
-          <td style="width: 8%;">나이</td>
-          <td>부포지션</td>
-        </tr>
-        <tr>
-          <td>포수</td>
-          <td><input type="text"></td>
-          <td>
-            <select class="custom-select" id="playerGrade" required>
-              <option value="">클래식</option>
-              <option value="">프랜차이즈</option>
-              <option value="">익스</option>
-              <option value="">시그니처</option>
-              <option value="">마스터</option>
-            </select>
-          </td>
-          <td>
-            <select class="custom-select" id="playerType" required>
-              <option value="">작전수행</option>
-              <option value="">호타준족</option>
-              <option value="">슬러거</option>
-              <option value="">밸런스</option>
-            </select>
-          </td>
-          <td>
-            <select class="custom-select" id="playerOrder" required>
-              <option value="">상위</option>
-              <option value="">클린업</option>
-              <option value="">하위</option>
-            </select>
-          </td>
-          <td>
-            <select class="custom-select" id="playerLevel" required>
-              <option value="">1</option>
-              <option value="">2</option>
-              <option value="">3</option>
-            </select>
-          </td>
-          <td>
-            <select class="custom-select" id="playerYear"" required>
+      <form action="/player" method="POST">
+        <table class="table table-striped">
+          <tr>
+            <td style="width: 15%;">
+              <input type="text" name="memberName">
+            </td>
+          </tr>
+          <tr>
+            <td style="width: 7%;">포지션</td>
+            <td style="width: 10%;">이름</td>
+            <td style="width: 15%;">등급</td>
+            <td style="width: 15%;">타입</td>
+            <td style="width: 10%;">타순</td>
+            <td style="width: 8%;">레벨</td>
+            <td style="width: 8%;">연도</td>
+            <td style="width: 8%;">나이</td>
+            <td>부포지션</td>
+          </tr>
+          <tr>
+            <td>
+              <select class="custom-select" name="playerMainPosition" required>
+                <option value="C">포수</option>
+                <option value="1B">1루수</option>
+                <option value="2B">2루수</option>
+                <option value="3B">3루수</option>
+                <option value="SS">유격수</option>
+                <option value="LF">좌익수</option>
+                <option value="CF">중견수</option>
+                <option value="RF">우익수</option>
+                <option value="DH">지명</option>
+                <option value="BC">벤치</option>
+                <option value="SP">선발</option>
+                <option value="RP">중계</option>
+                <option value="CR">마무리</option>
+              </select>
+            </td>
+            <td><input type="text" name="playerName"></td>
+            <td>
+              <select class="custom-select" name="playerClass" required>
+                <option value="CL">클래식</option>
+                <option value="FR">프랜차이즈</option>
+                <option value="EX">익스</option>
+                <option value="WIN">위너스</option>
+                <option value="MON">몬스터</option>
+                <option value="SIG">시그니처</option>
+                <option value="TH">타이틀홀더</option>
+                <option value="MA">마스터</option>
+                <option value="LE">레전드</option>
+                <option value="HOF">HOF</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="playerType" required>
+                <option value="JS">작전수행</option>
+                <option value="HT">호타준족</option>
+                <option value="SLG">슬러거</option>
+                <option value="BAL">밸런스</option>
+                <option value="NONE">NONE</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="playerOrder" required>
+                <option value="Top">상위</option>
+                <option value="CleanUp">클린업</option>
+                <option value="Bot">하위</option>
+                <option value="NONE">NONE</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="playerLevel" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </td>
+            <td>
+              <select class="custom-select" name="playerYear">
               <option value="">1</option>
               <option value="">2</option>
               <option value="">30</option>
             </select>
           </td>
-          <td><input type="text"></td>
-          <td>
-            <select class="custom-select" id="playerSubPosition" required>
-              <option value="">NONE</option>
-              <option value="">포수</option>
-              <option value="">1루수</option>
-            </select>
-          </td>
-        </tr>
-      </table>
+          <td><input type="text" name="playerAge"></td>
+            <td>
+              <select class="custom-select" name="playerSubPosition">
+                <option value="">NONE</option>
+                <option value="">포수</option>
+                <option value="">1루수</option>
+              </select>
+            </td>
+          </tr>
+        </table>
+        <button type="submit">확인</button>
+      </form>
       <!-- <div>
         <label for="firstName">First name</label>
           <input type="text" class="form-control" id="firstName" placeholder="" value="" required>

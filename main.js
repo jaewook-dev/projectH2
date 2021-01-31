@@ -6,7 +6,6 @@ import ejs from 'ejs';
 import database from './config/database.js';
 import bodyParser from 'body-parser'; // POST로 요청된 body를 쉽게 추출할 수 있는 모듈.
 import bcrypt from 'bcrypt';
-import mysql from 'mysql';
 import consoleStamp from 'console-stamp'; // console.log 시간 정보 추가
 
 const __dirname = path.resolve();
@@ -71,6 +70,31 @@ app.post('/singin', function(req, res) {
 
 // 선수 추가 화면으로
 app.get('/player', function(req, res) {
+    res.render('player', {});
+});
+
+app.post('/player', function(req, res) {
+    var memberName = req.body.memberName;
+    var playerName = req.body.playerName;
+    var playerMainPosition = req.body.playerMainPosition;
+    var playerClass = req.body.playerClass;
+    var playerLevel = req.body.playerLevel;
+    var playerAge = req.body.playerAge;
+    var playerType = req.body.playerType;
+    var playerOrder = req.body.playerOrder;
+
+    var insertPlayerSQL = "INSERT INTO MEMBER_PLAYER (MEMBER_NAME, PLAYER_NAME, PLAYER_POSITION_MAIN, PLAYER_CLASS, PLAYER_LEVEL, PLAYER_AGE, PLAYER_TYPE, PLAYER_ORDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+    dbConn.query(insertPlayerSQL, [memberName, playerName, playerMainPosition, playerClass, playerLevel, playerAge, playerType, playerOrder], function(err, results){
+
+        if(err) {
+            console.log(err);
+        } 
+
+    });
+
+    delete req.body;
+
     res.render('player', {});
 });
 
