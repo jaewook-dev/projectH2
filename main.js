@@ -1,5 +1,5 @@
 import express from 'express'; // express에서는 기본적으로 POST 기능을 제공하지 않는다. 따라서 body-parser 라는 미들웨어를 설치해야한다.
-import http from 'http';
+import http, { get } from 'http';
 import url from 'url'; // 요청한 url을 객체로 만들기 위해 url 모듈 사용.
 import path from 'path';
 import ejs from 'ejs';
@@ -68,34 +68,72 @@ app.post('/singin', function(req, res) {
     
 });
 
-// 선수 추가 화면으로
+// 선수 추가 화면(GET)
 app.get('/player', function(req, res) {
+    console.log('/player GET');
     res.render('player', {});
 });
 
+// 선수 추가 화면(POST)
 app.post('/player', function(req, res) {
+
+    console.log('----- /player(POST) start -----');
+
+    // 선수 정보 변수
     var memberName = req.body.memberName;
-    var playerName = req.body.playerName;
     var playerMainPosition = req.body.playerMainPosition;
+    var playerName = req.body.playerName;
     var playerClass = req.body.playerClass;
-    var playerLevel = req.body.playerLevel;
-    var playerAge = req.body.playerAge;
     var playerType = req.body.playerType;
     var playerOrder = req.body.playerOrder;
+    var playerLevel = req.body.playerLevel;
+    var playerYear = req.body.playerYear;
+    var playerAge = req.body.playerAge;
+    var playerSubPosition = req.body.playerSubPosition;
 
-    var insertPlayerSQL = "INSERT INTO MEMBER_PLAYER (MEMBER_NAME, PLAYER_NAME, PLAYER_POSITION_MAIN, PLAYER_CLASS, PLAYER_LEVEL, PLAYER_AGE, PLAYER_TYPE, PLAYER_ORDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    // body에 담겨 넘어온 prameter의 개수
+    var paramCount = Object.keys(req.body).length;
+    
+    //console.log(req.body);
 
-    dbConn.query(insertPlayerSQL, [memberName, playerName, playerMainPosition, playerClass, playerLevel, playerAge, playerType, playerOrder], function(err, results){
+    // memberName은 하나로 들어오는데 나머지 값들은 배열로 들어온다. >> insert 시 에러남.
+    // 임시 memberName 나중에 session으로 바꿔야 함.
+    if(playerName.length > 1) {
+        var arrMemberName = new Array();
+
+        for(var i=0; i<playerName.length; i++) {
+            arrMemberName[i] = memberName;
+        }
+    }
+
+    console.log(req.body);
+
+
+    var insertPlayerSQL = "";
+    insertPlayerSQL += " INSERT INTO MEMBER_PLAYER ( ";
+    insertPlayerSQL += "    MEMBER_NAME, PLAYER_MAIN_POSITION, PLAYER_NAME, PLAYER_CLASS, PLAYER_TYPE, PLAYER_ORDER, PLAYER_LEVEL, PLAYER_YEAR, PLAYER_AGE, PLAYER_SUB_POSITION ";
+    insertPlayerSQL += " ) VALUES ? ";
+
+    var insertPlayerValue = new Array();
+
+    for(var i=0; i<playerName.length; i++) {
+        insertPlayerValue[i] = [memberName, playerMainPosition[i], playerName[i], playerClass[i], playerType[i], playerOrder[i], playerLevel[i], playerYear[i], playerAge[i], playerSubPosition[i]];
+    }
+
+    console.log(insertPlayerValue);
+
+    dbConn.query(insertPlayerSQL, [insertPlayerValue], function(err, results){
 
         if(err) {
             console.log(err);
-        } 
+        } else {
+            console.log(results);
+        }
 
     });
 
-    delete req.body;
-
-    res.render('player', {});
+    console.log('----- /player(POST) end -----');
+    res.redirect('/player'); // Get 방식으로 /player 화면 redirect
 });
 
 app.listen(3000);
