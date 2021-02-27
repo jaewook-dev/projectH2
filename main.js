@@ -29,6 +29,10 @@ app.set('view engine', 'ejs');
 app.use(express.static(__dirname + '/public'));
 console.log(__dirname);
 
+app.get('/', function(req, res) {
+    res.render('main', {});
+});
+
 // login 화면으로
 app.get('/login', function(req, res) {
     res.render('login', {});
