@@ -7,38 +7,45 @@ import database from './config/database.js';
 import bodyParser from 'body-parser'; // POST로 요청된 body를 쉽게 추출할 수 있는 모듈.
 import bcrypt from 'bcrypt';
 import consoleStamp from 'console-stamp'; // console.log 시간 정보 추가
+import expressLayouts from 'express-ejs-layouts'; // for layout
 
 const __dirname = path.resolve();
 const app = express();
 consoleStamp(console, ['yyyy/mm/dd HH:MM:ss.l']); // console-stamp pattern 설정
 
-// body-parser 사용
+
 app.use(bodyParser.urlencoded({
     // extended 는 중첩된 객체표현을 허용할지 말지를 정한다.
     extended : false
 }));
+app.use(expressLayouts);
+app.use(express.static(__dirname + '/public'));
 
-var dbConn = database.init();
 
-// DB 연결 확인
-database.dbConnCheck(dbConn);
-
+app.set('layout', 'layout');
+app.set('layout extractScripts', true);
 app.set('views', __dirname + '/public/views');
 app.set('view engine', 'ejs');
 
-app.use(express.static(__dirname + '/public'));
-console.log(__dirname);
 
+/* -- DB 연결 확인 -- */
+var dbConn = database.init();
+database.dbConnCheck(dbConn);
+
+
+/* -- 화면 Control -- */
+// Main 화면
 app.get('/', function(req, res) {
-    res.render('main', {});
+    res.render('main', {
+        title : "test",
+        link : "/css/main.css"
+    });
 });
 
-// login 화면으로
+// 로그인 화면
 app.get('/login', function(req, res) {
     res.render('login', {});
 });
-
-// login
 app.post('/login', function(req, res) {
     var inputID = req.body.inputID;
     var inputPW = req.body.inputPW;
@@ -67,18 +74,15 @@ app.post('/login', function(req, res) {
     
 });
 
-// 회원 가입
-app.post('/singin', function(req, res) {
-    
-});
-
-// 선수 추가 화면(GET)
+// 선수 추가 화면
 app.get('/player', function(req, res) {
     console.log('/player GET');
-    res.render('player', {});
+    res.render('player', {
+        title : "선수 입력",
+        link : "/css/main.css"
+    });
 });
-
-// 선수 추가 화면(POST)
+// 선수 추가 화면
 app.post('/player', function(req, res) {
 
     console.log('----- /player(POST) start -----');
@@ -111,7 +115,6 @@ app.post('/player', function(req, res) {
     }
 
     console.log(req.body);
-
 
     var insertPlayerSQL = "";
     insertPlayerSQL += " INSERT INTO MEMBER_PLAYER ( ";

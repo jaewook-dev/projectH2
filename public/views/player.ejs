@@ -1,47 +1,4 @@
-<!DOCTYPE html>
-<html lang="ko">
-
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Checkout example · Bootstrap</title>
-
-  <!-- Bootstrap core CSS -->
-  <link href="/assets/dist/css/bootstrap.css" rel="stylesheet">
-  <link href="/css/player.css" rel="stylesheet">
-
-  <style>
-    td {
-      text-align: center
-    }
-
-    input {
-      display: block;
-      width: 100%;
-      height: calc(1.5em + 0.75rem + 2px);
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      font-weight: 400;
-      line-height: 1.5;
-      color: #495057;
-      background-color: #fff;
-      background-clip: padding-box;
-      border: 1px solid #ced4da;
-      border-radius: 0.25rem;
-      transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-
-    input:focus {
-      color: #495057;
-      background-color: #fff;
-      border-color: #80bdff;
-      outline: 0;
-      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-    }
-  </style>
-</head>
-
-<body class="bg-light">
-  <div class="container">
+  <div class="container bg-light">
     <div class="py-5 text-center">
       <h2>선수 입력 화면 임시</h2>
       <p class="lead">임시 화면입니다.</p>
@@ -60,14 +17,14 @@
           </tr>
         </table>
         <table class="table">
-            <tr>
-              <td>
-                <button type="button" onclick="addRow()">추가</button>
-              </td>
-              <td>
-                <button type="button" onclick="removeRow()">삭제</button>
-              </td>
-            </tr>
+          <tr>
+            <td>
+              <button type="button" onclick="addRow()">추가</button>
+            </td>
+            <td>
+              <button type="button" onclick="removeRow()">삭제</button>
+            </td>
+          </tr>
         </table>
         <table class="table table-striped" id="mainTable">
           <thead>
@@ -191,7 +148,7 @@
     }
 
     function removeRow() {
-      if(rowCount < 2) {
+      if (rowCount < 2) {
         alert("그만 지워");
       } else {
         rowCount = rowCount - 1;
@@ -201,6 +158,3 @@
     }
 
   </script>
-</body>
-
-</html>
