@@ -175,10 +175,6 @@
           <button type="submit" class="button">확인</button>
         </table>
       </form>
-      <!-- <div>
-        <label for="firstName">First name</label>
-          <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
-      </div> -->
     </div>
   </div>
   <script type='text/javascript'>
@@ -189,21 +185,18 @@
 
     function addRow() {
       rowCount = rowCount + 1;
-      mainTableBody.insertBefore(mainTableBody.rows[0].cloneNode(true), mainTable.rows[rowCount]);
+      mainTableBody.insertBefore(mainTableBody.rows[0].cloneNode(true), mainTable.rows[rowCount]); // refChild null이어도 마지막 리스트에 추가
 
       console.log(rowCount);
     }
 
     function removeRow() {
-      
-
       if(rowCount < 2) {
         alert("그만 지워");
       } else {
         rowCount = rowCount - 1;
         mainTableBody.deleteRow(rowCount);
       }
-      
       console.log(rowCount);
     }
 
