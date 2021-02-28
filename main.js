@@ -36,9 +36,9 @@ database.dbConnCheck(dbConn);
 /* -- 화면 Control -- */
 // Main 화면
 app.get('/', function(req, res) {
+    console.log("/main (GET)");
     res.render('main', {
-        title : "test",
-        link : "/css/main.css"
+        title : "test"
     });
 });
 
@@ -76,16 +76,15 @@ app.post('/login', function(req, res) {
 
 // 선수 추가 화면
 app.get('/player', function(req, res) {
-    console.log('/player GET');
+    console.log('/player (GET)');
     res.render('player', {
-        title : "선수 입력",
-        link : "/css/main.css"
+        title : "선수 입력"
     });
 });
 // 선수 추가 화면
 app.post('/player', function(req, res) {
 
-    console.log('----- /player(POST) start -----');
+    console.log('/player(POST) START');
 
     // 선수 정보 변수
     var memberName = req.body.memberName;
@@ -139,7 +138,7 @@ app.post('/player', function(req, res) {
 
     });
 
-    console.log('----- /player(POST) end -----');
+    console.log('/player(POST) END');
     res.redirect('/player'); // Get 방식으로 /player 화면 redirect
 });
 
