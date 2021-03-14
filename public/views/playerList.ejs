@@ -1,8 +1,11 @@
 <div class="container bg-light">
     <div class="py-5 text-center">
         <h2>선수 리스트 화면 임시</h2>
-        <p class="lead">임시 화면입니다.</p>
+        <hr>
+        <h4>검색 조건</h4>
     </div>
+    
+
     <table class="table table-striped" id="mainTable">
         <thead>
           <tr>
@@ -18,7 +21,7 @@
           </tr>
         </thead>
         <tbody>
-            <% if(playerList != null) { %>
+            <% if(playerList != null && playerList.length > 0) { %>
                 <% for(var i=0; i<playerList.length; i++) { %>
                     <tr>
                         <td><%= playerList[i].MEMBER_NAME %></td>
@@ -33,9 +36,9 @@
                     </tr>
                 <% } %>
             <% } else { %>
-            <tr>
-                <td>test</td>
-            </tr>
+                <tr>
+                    <td colspan="9">데이터가 존재하지 않습니다.</td>
+                </tr>
             <% } %>
         </tbody>
     </table>

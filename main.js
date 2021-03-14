@@ -80,8 +80,11 @@ app.get('/playerList', function(req, res) {
 
     var listPlayerSQL = "";
     listPlayerSQL += " SELECT ";
-    listPlayerSQL += "      MEMBER_NAME, PLAYER_MAIN_POSITION, PLAYER_NAME, PLAYER_CLASS, PLAYER_TYPE, PLAYER_ORDER, PLAYER_LEVEL, PLAYER_YEAR, PLAYER_AGE"
+    listPlayerSQL += "      MEMBER_NAME, PLAYER_MAIN_POSITION, PLAYER_NAME, PLAYER_CLASS, PLAYER_TYPE, PLAYER_ORDER, PLAYER_LEVEL, PLAYER_YEAR, PLAYER_AGE";
 	listPlayerSQL += " FROM MEMBER_PLAYER ";
+    listPlayerSQL += " WHERE MEMBER_NAME = 'TEST' ";
+
+    console.log(listPlayerSQL);
 
     dbConn.query(listPlayerSQL, function(err, results){
 
@@ -94,7 +97,6 @@ app.get('/playerList', function(req, res) {
             res.render('playerList', {
                 title : "선수 리스트",
                 // async: true,
-                test : results[0].MEMBER_NAME,
                 playerList : results
             });
         }
