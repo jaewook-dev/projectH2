@@ -1,0 +1,42 @@
+<div class="container bg-light">
+    <div class="py-5 text-center">
+        <h2>선수 리스트 화면 임시</h2>
+        <p class="lead">임시 화면입니다.</p>
+    </div>
+    <table class="table table-striped" id="mainTable">
+        <thead>
+          <tr>
+            <td style="width: 15%;">구단주명</td>
+            <td style="width: 10%;">포지션</td>
+            <td style="width: 10%;">이름</td>
+            <td style="width: 15%;">등급</td>
+            <td style="width: 15%;">타입</td>
+            <td style="width: 10%;">타순</td>
+            <td style="width: 8%;">레벨</td>
+            <td style="width: 8%;">연도</td>
+            <td style="width: 8%;">나이</td>
+          </tr>
+        </thead>
+        <tbody>
+            <% if(playerList != null) { %>
+                <% for(var i=0; i<playerList.length; i++) { %>
+                    <tr>
+                        <td><%= playerList[i].MEMBER_NAME %></td>
+                        <td><%= playerList[i].PLAYER_MAIN_POSITION %></td>
+                        <td><%= playerList[i].PLAYER_NAME %></td>
+                        <td><%= playerList[i].PLAYER_CLASS %></td>
+                        <td><%= playerList[i].PLAYER_TYPE %></td>
+                        <td><%= playerList[i].PLAYER_ORDER %></td>
+                        <td><%= playerList[i].PLAYER_LEVEL %></td>
+                        <td><%= playerList[i].PLAYER_YEAR %></td>
+                        <td><%= playerList[i].PLAYER_AGE %></td>
+                    </tr>
+                <% } %>
+            <% } else { %>
+            <tr>
+                <td>test</td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>

@@ -74,17 +74,49 @@ app.post('/login', function(req, res) {
     
 });
 
+// 선수 리스트 화면
+app.get('/playerList', function(req, res) {
+    console.log('/playerList (GET)');
+
+    var listPlayerSQL = "";
+    listPlayerSQL += " SELECT ";
+    listPlayerSQL += "      MEMBER_NAME, PLAYER_MAIN_POSITION, PLAYER_NAME, PLAYER_CLASS, PLAYER_TYPE, PLAYER_ORDER, PLAYER_LEVEL, PLAYER_YEAR, PLAYER_AGE"
+	listPlayerSQL += " FROM MEMBER_PLAYER ";
+
+    dbConn.query(listPlayerSQL, function(err, results){
+
+        if(err) {
+            console.log(err);
+        } else {
+            //console.log(results);
+            console.log('Read Success!');
+
+            res.render('playerList', {
+                title : "선수 리스트",
+                // async: true,
+                test : results[0].MEMBER_NAME,
+                playerList : results
+            });
+        }
+
+    });
+});
+app.post('/playerList', function(req, res) {
+    console.log('/playerList (POST)');
+
+    res.redirect('/playerList');
+});
+
 // 선수 추가 화면
-app.get('/player', function(req, res) {
-    console.log('/player (GET)');
-    res.render('player', {
+app.get('/playerInsert', function(req, res) {
+    console.log('/playerInsert (GET)');
+    res.render('playerInsert', {
         title : "선수 입력"
     });
 });
-// 선수 추가 화면
-app.post('/player', function(req, res) {
+app.post('/playerInsert', function(req, res) {
 
-    console.log('/player(POST) START');
+    console.log('/playerInsert (POST) START');
 
     // 선수 정보 변수
     var memberName = req.body.memberName;
@@ -138,8 +170,8 @@ app.post('/player', function(req, res) {
 
     });
 
-    console.log('/player(POST) END');
-    res.redirect('/player'); // Get 방식으로 /player 화면 redirect
+    console.log('/playerInsert (POST) END');
+    res.redirect('/playerInsert'); // Get 방식으로 /player 화면 redirect
 });
 
 app.listen(3000);
